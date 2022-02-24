@@ -1,3 +1,5 @@
+
+
 $("document").ready(function(){
 
     $("table").css({"background-color":"red"})
@@ -50,9 +52,18 @@ $("document").ready(function(){
             },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
+                $("#loader").show();
             },
             success: function (data, textStatus) { 
-                    alert(" Object: id: " + data.empleado.Id+" name: "+data.empleado.Nombre+" Edad "+data.empleado.Edad+" Antiguedad: "+data.empleado.Antiguedad+" Categoria: "+data.empleado.Categoria);
+                $("#empleado").html(
+                "<ul>"+
+                    "<li>ID: "+data.empleado.Id+"</li>"+
+                    "<li>NOMBRE: "+data.empleado.Nombre+"</li>"+
+                    "<li>EDAD: "+data.empleado.Edad+"</li>"+
+                    "<li>ANTIGUEDAD: "+data.empleado.Antiguedad+"</li>"+
+                    "<li>CATEGORIA: "+data.empleado.Categoria+"</li>"+
+                "</ul>"+
+                    "Id: " + data.empleado.Id+" \n Nombre: "+data.empleado.Nombre+"\nEdad "+data.empleado.Edad+"\nAntiguedad: "+data.empleado.Antiguedad+"\nCategoria: "+data.empleado.Categoria)
             },
             error(xhr,status,error){
                 alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
