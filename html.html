@@ -8,19 +8,32 @@
 </head>
 <body>
     <h2>Jquery learning & AJAX requests</h2>
+    <ul>
+        <li>
+            <button class="btn-get">JQuery AJAX <b>getById</b>  from MVCproject</button>
+            Id empleado :<input type="text" name="" id="in-text-get" placeholder="9">
+        </li>
+        <img src="media/loader-gif.gif" alt="Loading..." hidden="true">
+        
+        <li>
+            <button class="btn-get-all">JQuery AJAX <b>getAll</b> from MVCproject</button>
+        </li>
+        <li>
+            <button class="btn-update">JQuery AJAX <b>UpdateById</b> from MVCproject</button>
 
-    <p>
-        Id empleado :<input type="text" name="" id="in-text-get">
-        <button class="btn-get">http get Empleado from MVC project</button>
-        work in progres
-    </p>
-    <img src="media/loader-gif.gif" alt="Loading..." hidden="true">
-    <p id="empleado"></p>
-    <button id="btn-show">Show</button>
-    <button id="btn-hide">Hide</button>
+            <input type="number" id="Id-edit" placeholder="ID" required="true">
+            <input type="text" id="Nombre-edit" placeholder="Nombre">
+            <input type="number" id="Edad-edit" placeholder="Edad">
+            <input type="number" id="Antiguedad-edit" placeholder="Antiguedad">
+            <input type="text" id="Categoria-edit" placeholder="Categoria">
+        </li>
+    </ul>
+    <p id="empleado" ></p>   
+
     <p class="a">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo nisi vel, itaque porro distinctio perspiciatis dolorum cumque saepe, eveniet alias dicta soluta laboriosam ex aperiam, eos nihil sit necessitatibus numquam.</p>
 
-
+    <button id="btn-show">Show</button>
+    <button id="btn-hide">Hide</button>
 <table>
     <tr>
         <td>1a</td>
@@ -32,15 +45,7 @@
     </tr>
 </table>
 
-<form action="" method="post">
-    <input type="text" placeholder="ID" required="true">
-    <input type="text" placeholder="Nombre">
-    <input type="text" placeholder="Edad">
-    <input type="text" placeholder="Antiguedad">
-    <input type="text" placeholder="categoria">
 
-    <button>Update Empleado</button>
-</form>
 
 
 <p class="pAlert">Hola buenas tardes     Veritatis, aliquam excepturi! Illo similique sit dolor aliquam nulla, obcaecati doloremque id reiciendis sapiente dolorum maiores harum delectus provident eius dicta ab.</p>
@@ -51,6 +56,7 @@
 </footer>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="JS.js"></script>
+<script src="APICalls.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </html>
