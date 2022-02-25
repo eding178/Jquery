@@ -2,6 +2,8 @@
 
 $("document").ready(function(){
 
+    $("#loader").hide()
+
     $("table").css({"background-color":"red"})
 
     $("#btn-hide").click(function(){$("table").hide()})

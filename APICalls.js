@@ -5,15 +5,19 @@ var urlBase="http://localhost:57000/Empleados/";
 //GET BY ID
 ///////////
 $(".btn-get").click(function() { 
+    $("#loader").fadeIn();
+
     $.ajax({ 
         url: urlBase+"DetailsAPI/"+$("#in-text-get").val(),
         type: 'GET',
         dataType: "jsonp",
         jsonpCallback: 'Method',
         beforeSend: function (xhr) {
-            $("#loader").show();
+            $("#loader").fadeIn();
         },
         success: function (data, textStatus) { 
+            $("#loader").fadeOut();
+
             $("#empleado").html(
             "<ul>"+
                 "<li>ID: "+data.empleado.Id+"</li>"+
@@ -24,6 +28,7 @@ $(".btn-get").click(function() {
             "</ul>"
             )},
         error(xhr,status,error){
+            $("#loader").fadeOut();
             alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
         }
     });
@@ -33,19 +38,19 @@ $(".btn-get").click(function() {
 //GET ALL
 ///////////
 $(".btn-get-all").click(function() { 
+    $("#loader").fadeIn();
     $.ajax({ 
         url: urlBase+"allAPI/",
         type: 'GET',
         dataType: "jsonp",
         jsonpCallback: 'Method',
-        beforeSend: function (xhr) {
-            $("#loader").show();
-        },
         success: function (data, textStatus) { 
+            $("#loader").fadeOut();
             $("#empleado").html("")
                 data.empleado.forEach( function(valor, indice, array) {
                     $("#empleado").append(
                         "<ul>"+
+                        "<li><button id=\""+valor.Id +"\" class=\"btn-del\">Borrar Empleado</button></li>"+
                         "<li>ID: "+valor.Id+"</li>"+
                         "<li>NOMBRE: "+valor.Nombre+"</li>"+
                         "<li>EDAD: "+valor.Edad+"</li>"+
@@ -57,6 +62,7 @@ $(".btn-get-all").click(function() {
             )
         },
         error(xhr,status,error){
+            $("#loader").fadeOut();
             alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
         }
     });
@@ -66,6 +72,7 @@ $(".btn-get-all").click(function() {
 //UPDATE BY ID
 ///////////
 $(".btn-update").click(function() { 
+    $("#loader").fadeIn();
     $.ajax({ 
         url: urlBase+"EditAPI/"+$("#Id-edit").val(),
         type: 'GET',
@@ -88,18 +95,21 @@ $(".btn-update").click(function() {
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
-            $("#loader").show();
         },
         success: function (data, textStatus) { 
-           
-        },
-            
+            $("#loader").fadeOut();
+        }, 
         error(xhr,status,error){
-            //alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
+            alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
+            $("#loader").fadeOut();
+
         }
     });
 });
 
+//////////////
+//DELETE BY ID
+//////////////
 
 
 
