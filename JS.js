@@ -34,9 +34,13 @@ $("document").ready(function(){
 $("#btn-piramide").click(function(){
     var rows = $("#piramide-input").val()
     for (var j = 0; j < rows; j++) {
+        if(j % 2 == 0)
         $("#piramide").append("<br/>");
+        for(var k = 0; k < (rows-j)-2;k++){
+            $("#piramide").append("-")
+        }
         for (var i = 0; i <= j; i++) {
-            
+            if(j % 2 == 0)
             $("#piramide").append("*");
         }
     }
@@ -48,11 +52,11 @@ $(function(){
     });
     
     function oneSecondFunction() {
-        console.log("--------------Begin move---------------")
+        console.log("---------Begin move----------")
         var pxMove = 30
         var rndProb = randomIntFromInterval(1, 10)
 
-    if(rndProb <= 9){//0 to 9 probabilitat que vingui cap a mi aquell movemax:9
+    if(rndProb <= 8){//0 to 9 probabilitat que vingui cap a mi aquell movemax:9
         console.log("NOT rnd move")
 
         //miro la meva posicio
@@ -74,7 +78,7 @@ $(function(){
                 $("#showroomOther").animate({
                     top: "-="+pxMove+"px"
                 },"fast");
-            }else{
+            }else if (mytop>histop){
                 $("#showroomOther").animate({
                     top: "+="+pxMove+"px"
                 },"fast");
@@ -84,7 +88,7 @@ $(function(){
                 $("#showroomOther").animate({
                     left: "-="+pxMove+"px"
                 },"fast");
-            }else{
+            }else if(myLeft>hisLeft){
                 $("#showroomOther").animate({
                     left: "+="+pxMove+"px"
                 },"fast");
