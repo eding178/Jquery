@@ -50,79 +50,113 @@ $("#btn-piramide").click(function(){
 ///////////////
 
 $(function(){
-    setInterval(oneSecondFunction, 1000);
+    setInterval(oneSecondFunction, 280);
     });
     
     function oneSecondFunction() {
         console.log("---------Begin move----------")
-        var pxMove = 30
-        var rndProb = randomIntFromInterval(1, 10)
+        
+        var pxMove = 15//px per step
+        var ProbTrackedMove = 10//0 to 10 probabilidad de que cada step no sea random
+        var signe1 = "+="
+        var signe2 = "-="
+        var fantasmaDebil = $("#star").attr("style").split("display:")[1]==" none;"
 
+        if(fantasmaDebil){
+            //fantasma bye
+            signe1="-="
+            signe2="+="
+        }
+        
         //miro la meva posicio
         MyArr = $("#showroom").attr('style').split("top:")[1].split("left:")
-        var mytop=MyArr[0].split("px")[0]
+        var myTop=MyArr[0].split("px")[0]
         var myLeft = MyArr[1].split("px")[0]
-        //console.log("yo "+myLeft+" "+mytop)
 
         //miro la seva posicio
         var arrOther =   $("#showroomOther").attr('style').split("top:")[1].split("left:")
-        var histop = arrOther[0].split("px")[0]
+        var hisTop = arrOther[0].split("px")[0]
         var hisLeft = arrOther[1].split("px")[0]
+        console.log(myTop+" "+myLeft)
+        console.log(hisTop+" "+hisLeft)
 
-        console.log("ell "+hisLeft+" "+histop)
-        console.log("yo "+myLeft+" "+mytop)
-
-
-    if(rndProb <= 10){//0 to 10 "noob to hard"
-        console.log("NOT rnd move")
-
-        if(Math.abs(myLeft - hisLeft) < Math.abs(mytop - histop)){
-            if(Number(mytop) < Number(histop)){
-                console.log("up")
+    var rndProb = randomIntFromInterval(1, 10)
+    if(rndProb <= ProbTrackedMove){
+        if(Math.abs(myLeft - hisLeft) < Math.abs(myTop - hisTop)){
+            if(Number(myTop) < Number(hisTop)){
                 $("#showroomOther").animate({
-                    top: "-=" + pxMove + "px"
+                    top: signe2 + pxMove + "px"
                 },"fast");
-            }else if (Number(mytop) > Number(histop)){
-                console.log("down")
+            }else if (Number(myTop) > Number(hisTop)){
                 $("#showroomOther").animate({
-                    top: "+=" + pxMove + "px"
+                    top: signe1 + pxMove + "px"
                 },"fast");
             }
-        }else if(Math.abs(myLeft - hisLeft) > Math.abs(mytop - histop)){
+        }else if(Math.abs(myLeft - hisLeft) > Math.abs(myTop - hisTop)){
             if(Number(myLeft) < Number(hisLeft)){
-                console.log("left")
                 $("#showroomOther").animate({
-                    left: "-=" + pxMove + "px"
+                    left: signe2 + pxMove + "px"
                 },"fast");
             }else if(Number(myLeft) > Number(hisLeft)){
-                console.log("right")
                 $("#showroomOther").animate({
-                    left: "+=" + pxMove + "px"
+                    left: signe1 + pxMove + "px"
                 },"fast");
             }
         }   
     }
+    //Random move
     else{
-        console.log("rnd move")
-        console.log("ell "+hisLeft+" "+histop)
         var rnd = randomIntFromInterval(37, 40)
         if (rnd == 37) {
             $("#showroomOther").animate({
-                left: "-="+pxMove+"px"
+                left: signe2+pxMove+"px"
             },"fast");
         } else if (rnd == 38) {
             $("#showroomOther").animate({
-                top: "-="+pxMove+"px"
+                top: signe2+pxMove+"px"
             },"fast");
         } else if (rnd == 39) {
             $("#showroomOther").animate({
-                left: "+="+pxMove+"px"
+                left: signe1+pxMove+"px"
             },"fast");
         } else if (rnd == 40) {
             $("#showroomOther").animate({
-                top: "+="+pxMove+"px"
+                top: signe1+pxMove+"px"
             },"fast");
         }
+    }
+
+// IF fantasma_debil
+    if(fantasmaDebil)
+        countFD -= 1
+    if(countFD <= 0){
+        $("#fantasma").attr("src","media/fantasma.gif")
+        var fantasmaDebil = false
+        countFD = 20
+    }
+
+// IF PICk Star
+if(Math.abs(Number(myLeft) - 400) <= 25 && Math.abs(Number(myTop) - 400)<=20){
+    $("#star").hide()
+    $("#fantasma").attr("src","media/fantasma_debil.gif")
+    fantasmaDebil=true
+}
+
+// IF DIE
+    if(Math.abs(Number(myLeft) - Number(hisLeft)) <= 25 && Math.abs(Number(myTop) - Number(hisTop))<=20){
+        console.log("die")
+        $("#showroomOther").animate({
+            top: "400px",
+            left:"400px"
+        },"fast");
+        $("#showroom").animate({
+            top: "400px",
+            left: "20px"
+        },"fast");
+        $("#star").show()
+        $("#fantasma").attr("src","media/fantasma.gif")
+        fantasmaDebil = false
+        var countFD = 200
     }
 }
 function randomIntFromInterval(min, max) { // min and max included 
