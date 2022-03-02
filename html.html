@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body style="height: 100%; overflow: hidden;">
     <h2>Jquery learning & AJAX requests</h2>
     <ul>
         <li>
-            <button class="btn-get">JQuery AJAX <b>getById</b>  from MVCproject</button>
-            Id empleado :<input type="text" name="" id="in-text-get" placeholder="9">
+            <button class="btn-get">JQuery AJAX <b>getById</b>  from MVCproject</button> Id empleado :<input type="text" name="" id="in-text-get" placeholder="9">
         </li>
         <img src="media/loader-gif.gif" id="loader" alt="Loading...">
-        
+
         <li>
             <button class="btn-get-all">JQuery AJAX <b>getAll</b> from MVCproject</button>
         </li>
@@ -28,43 +29,45 @@
             <input type="text" id="Categoria-edit" placeholder="Categoria">
         </li>
     </ul>
-    <p id="empleado" ></p>   
+    <p id="empleado"></p>
 
     <p class="a">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo nisi vel, itaque porro </p>
 
     <button id="btn-show">Show</button>
     <button id="btn-hide">Hide</button>
-<table>
-    <tr>
-        <td>1a</td>
-        <td>2a</td>
-    </tr>
-    <tr>
-        <td>1b</td>
-        <td>2b</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td>1a</td>
+            <td>2a</td>
+        </tr>
+        <tr>
+            <td>1b</td>
+            <td>2b</td>
+        </tr>
+    </table>
 
 
-<p class="pAlert">Hola buenas tardes     Veritatis, aliquam excepturi! Illo similique sit dolor.</p>
-<button id="more">More</button>
-<div id="showroomOther" style="position:absolute;border-radius:30%;top:400px;left:400px;"><img id="fantasma" style="height:50px;width:50px;"src="media/fantasma.gif" alt=""></div>
+    <p class="pAlert">Hola buenas tardes Veritatis, aliquam excepturi! Illo similique sit dolor.</p>
+    <button id="more">More</button>
+    <div id="game">
+        <div class="showroomOther" style="position:absolute;border-radius:30%;top:400px;left:400px;"><img class="fantasma" style="height:50px;width:50px;" src="media/fantasma.gif" alt=""></div>
 
-<div id="showroom"  style="position:absolute;border-radius:30%;top:400px;left:20px;"><img style="height:40px;width:40px" src="media/pacman.gif" alt=""></div>
-<div id="star"  style="position:absolute;border-radius:30%;top:400px;left:400px;"><img style="height:30px;width:30px" src="media/star.gif" alt=""></div>
-
-<p> Problema logic</br> 
-<button id="btn-piramide">Generate *</button>
-<input type="number" name="" id="piramide-input">
-<p id="piramide"></p>
-</p>
+        <div id="showroom" style="position:absolute;border-radius:30%;top:400px;left:20px;"><img style="height:40px;width:40px" src="media/pacman.gif" alt=""></div>
+        <div id="star" style="position:absolute;border-radius:30%;top:400px;left:400px;"><img style="height:30px;width:30px" src="media/star.gif" alt=""></div>
+    </div>
+    <p> Problema logic</br>
+        <button id="btn-piramide">Generate *</button>
+        <input type="number" name="" id="piramide-input">
+        <p id="piramide"></p>
+    </p>
 </body>
 <footer>
-    <p  id="time-now" align="center"></p>
+    <p id="time-now" align="center"></p>
 </footer>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="JS.js"></script>
 <script src="APICalls.js"></script>
+<script src="FullMove.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </html>
