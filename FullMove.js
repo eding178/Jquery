@@ -14,7 +14,7 @@ $("document").ready(function() {
         console.log("---------Begin move----------")
 
         var pxMove = 15 //px per step
-        var ProbTrackedMove = 8 //0 to 10 probabilidad de que cada step no sea random
+        var ProbTrackedMove = 7 //0 to 10 probabilidad de que cada step no sea random
         var signe1 = "+="
         var signe2 = "-="
         var fantasmaDebil = $("#star").attr("style").split("display:")[1] == " none;"
@@ -23,6 +23,10 @@ $("document").ready(function() {
             signe1 = "-="
             signe2 = "+="
             if (randomIntFromInterval(1, 100) < 5) {
+                $("$#star").animate({
+                    top: randomIntFromInterval(10, 450) + "px",
+                    left: randomIntFromInterval(10, 450) + "px"
+                })
                 $("#star").show()
             }
         } else { $(".fantasma").attr("src", "media/fantasma.gif") }
@@ -48,21 +52,21 @@ $("document").ready(function() {
             if (rndProb <= ProbTrackedMove) {
                 if (Math.abs(myLeft - hisLeft) < Math.abs(myTop - hisTop)) {
                     if (Number(myTop) < Number(hisTop)) {
-                        $(".showroomOther").animate({
+                        currentElement.animate({
                             top: signe2 + pxMove + "px"
                         }, "fast");
                     } else if (Number(myTop) > Number(hisTop)) {
-                        $(".showroomOther").animate({
+                        currentElement.animate({
                             top: signe1 + pxMove + "px"
                         }, "fast");
                     }
                 } else if (Math.abs(myLeft - hisLeft) > Math.abs(myTop - hisTop)) {
                     if (Number(myLeft) < Number(hisLeft)) {
-                        $(".showroomOther").animate({
+                        currentElement.animate({
                             left: signe2 + pxMove + "px"
                         }, "fast");
                     } else if (Number(myLeft) > Number(hisLeft)) {
-                        $(".showroomOther").animate({
+                        currentElement.animate({
                             left: signe1 + pxMove + "px"
                         }, "fast");
                     }
@@ -72,19 +76,19 @@ $("document").ready(function() {
             else {
                 var rnd = randomIntFromInterval(37, 40)
                 if (rnd == 37) {
-                    $(".showroomOther").animate({
+                    currentElement.animate({
                         left: signe2 + pxMove + "px"
                     }, "fast");
                 } else if (rnd == 38) {
-                    $(".showroomOther").animate({
+                    currentElement.animate({
                         top: signe2 + pxMove + "px"
                     }, "fast");
                 } else if (rnd == 39) {
-                    $(".showroomOther").animate({
+                    currentElement.animate({
                         left: signe1 + pxMove + "px"
                     }, "fast");
                 } else if (rnd == 40) {
-                    $(".showroomOther").animate({
+                    currentElement.animate({
                         top: signe1 + pxMove + "px"
                     }, "fast");
                 }
