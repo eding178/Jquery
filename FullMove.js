@@ -37,7 +37,6 @@ $("document").ready(function() {
         var myLeft = MyArr[1].split("px")[0]
 
         //miro la seva posicio
-        console.log($("#game").find(".showroomOther"))
         jQuery('.showroomOther').each(function() {
             var currentElement = $(this);
             //console.log(currentElement.attr("style").split("top:")[1].split("left:"))
