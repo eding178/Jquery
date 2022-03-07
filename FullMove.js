@@ -55,8 +55,6 @@ $("document").ready(function() {
             var currentElementAttr = currentElement.attr('style').split("top:")[1].split("left:")
             var hisTop = currentElementAttr[0].split("px")[0]
             var hisLeft = currentElementAttr[1].split("px")[0]
-            console.log(myTop + " " + myLeft)
-            console.log(hisTop + " " + hisLeft)
 
             var rndProb = randomIntFromInterval(1, 10)
             if (rndProb <= ProbTrackedMove) {
