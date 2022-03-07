@@ -32,7 +32,7 @@ $("document").ready(function() {
             ProbTrackedMove += 1
             signe1 = "-="
             signe2 = "+="
-            if (randomIntFromInterval(1, 100) < 5) {
+            if (randomIntFromInterval(1, 1000) < 35) {
                 topStar = randomIntFromInterval(10, 450)
                 leftStar = randomIntFromInterval(10, 450)
                 $("#star").animate({
@@ -121,7 +121,6 @@ $("document").ready(function() {
                     totalWin = Number(getCookie("twins")) + 1
                     setCookie("twins", totalWin, 1000)
                     $("#wins").text(totalWin)
-
                     $("#game").append("<div class=\"showroomOther\" style=\"position:absolute;border-radius:30%;top:" + randomIntFromInterval(50, 600) + "px;left:" + randomIntFromInterval(50, 700) + "px;\"><img class=\"fantasma\" style=\"height:50px;width:50px;\" src=\"media/fantasma.gif\"</div>")
                 } else {
                     //lose
@@ -143,7 +142,7 @@ $("document").ready(function() {
                     left: "400px"
                 }, "fast");
 
-
+                $("#star").show()
                 $(".fantasma").attr("src", "media/fantasma.gif")
             }
         })
