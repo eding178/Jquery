@@ -2,7 +2,7 @@ $("document").ready(function() {
 
     $("#loader").hide()
 
-    $("table").css({ "background-color": "red" })
+    $("table").css({ "background-color": "#BBBBBB" })
 
     $("#btn-hide").click(function() { $("table").hide() })
     $("#btn-show").click(function() { $("table").show() })

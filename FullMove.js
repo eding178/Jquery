@@ -1,5 +1,11 @@
 $("document").ready(function() {
 
+    $("#reset-btn").click(function() {
+        setCookie("twins", 0, 1000)
+        setCookie("tloses", 0, 1000)
+        $("#loses").text(0)
+        $("#wins").text(0)
+    })
 
 
     ////////////////
@@ -18,14 +24,20 @@ $("document").ready(function() {
         var signe1 = "+="
         var signe2 = "-="
         var fantasmaDebil = $("#star").attr("style").split("display:")[1] == " none;"
+        arrStar = $("#star").attr("style").split("top:")[1].split("left:");
+        var topStar = arrStar[0].split("px")[0]
+        var leftStar = arrStar[1].split("px")[0]
 
         if (fantasmaDebil) {
+            ProbTrackedMove += 1
             signe1 = "-="
             signe2 = "+="
             if (randomIntFromInterval(1, 100) < 5) {
-                $("$#star").animate({
-                    top: randomIntFromInterval(10, 450) + "px",
-                    left: randomIntFromInterval(10, 450) + "px"
+                topStar = randomIntFromInterval(10, 450)
+                leftStar = randomIntFromInterval(10, 450)
+                $("#star").animate({
+                    top: topStar + "px",
+                    left: leftStar + "px"
                 })
                 $("#star").show()
             }
@@ -39,11 +51,10 @@ $("document").ready(function() {
         //miro la seva posicio
         jQuery('.showroomOther').each(function() {
             var currentElement = $(this);
-            //console.log(currentElement.attr("style").split("top:")[1].split("left:"))
 
-            var arrOther = currentElement.attr('style').split("top:")[1].split("left:")
-            var hisTop = arrOther[0].split("px")[0]
-            var hisLeft = arrOther[1].split("px")[0]
+            var currentElementAttr = currentElement.attr('style').split("top:")[1].split("left:")
+            var hisTop = currentElementAttr[0].split("px")[0]
+            var hisLeft = currentElementAttr[1].split("px")[0]
             console.log(myTop + " " + myLeft)
             console.log(hisTop + " " + hisLeft)
 
@@ -94,10 +105,14 @@ $("document").ready(function() {
             }
 
             // IF PICk Star
-            if (Math.abs(Number(myLeft) - 400) <= 25 && Math.abs(Number(myTop) - 400) <= 20) {
+
+            if (leftStar == null) {
+                leftStar = 400;
+                topStar = 400;
+            }
+            if (Math.abs(Number(myLeft) - leftStar) <= 25 && Math.abs(Number(myTop) - topStar) <= 20) {
                 $(".fantasma").attr("src", "media/fantasma_debil.gif")
                 $("#star").hide()
-
             }
 
             // IF DIE OR WIN
@@ -105,24 +120,32 @@ $("document").ready(function() {
 
                 if (fantasmaDebil) {
                     //win
-                    console.log("WIN")
+                    totalWin = Number(getCookie("twins")) + 1
+                    setCookie("twins", totalWin, 1000)
+                    $("#wins").text(totalWin)
 
-                    $("#game").append("<div class=\"showroomOther\" style=\"position:absolute;border-radius:30%;top:" + randomIntFromInterval(100, 500) + "px;left:" + randomIntFromInterval(100, 500) + "px;\"><img class=\"fantasma\" style=\"height:50px;width:50px;\" src=\"media/fantasma.gif\"</div>")
+                    $("#game").append("<div class=\"showroomOther\" style=\"position:absolute;border-radius:30%;top:" + randomIntFromInterval(50, 600) + "px;left:" + randomIntFromInterval(50, 700) + "px;\"><img class=\"fantasma\" style=\"height:50px;width:50px;\" src=\"media/fantasma.gif\"</div>")
                 } else {
                     //lose
+                    $("#showroom").animate({
+                        top: "400px",
+                        left: "20px"
+                    }, "fast");
+                    totalLose = Number(getCookie("tloses")) + 1
+                    setCookie("tloses", totalLose, 1000)
+                    $("#loses").text(totalLose)
 
                 }
-                /*
-                            $(".showroomOther").animate({
-                                top: "400px",
-                                left: "400px"
-                            }, "fast");
-                */
-                $("#showroom").animate({
+                //rate
+                rate = Number(getCookie("twins")) / Number(getCookie("tloses"))
+                $("#rate").text(rate)
+
+                currentElement.animate({
                     top: "400px",
-                    left: "20px"
+                    left: "400px"
                 }, "fast");
-                $("#star").show()
+
+
                 $(".fantasma").attr("src", "media/fantasma.gif")
             }
         })
