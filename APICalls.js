@@ -4,9 +4,7 @@ $("document").ready(function() {
     //GET BY ID
     ///////////
     $(".btn-get").click(function() {
-
         $("#loader").fadeIn();
-
         $.ajax({
             url: urlBase + "DetailsAPI/" + $("#in-text-get").val(),
             type: 'GET',
@@ -39,33 +37,7 @@ $("document").ready(function() {
     //GET ALL
     ///////////
     $(".btn-get-all").click(function() {
-        $("#loader").fadeIn();
-        $.ajax({
-            url: urlBase + "allAPI/",
-            type: 'GET',
-            dataType: "jsonp",
-            jsonpCallback: 'Method',
-            success: function(data, textStatus) {
-                $("#loader").fadeOut();
-                $("#empleado").html("")
-                data.empleado.forEach(function(valor, indice, array) {
-                    $("#empleado").append(
-                        "<ul>" +
-                        "<li><button class=\"btn-del\" id=\"" + valor.Id + "\">Borrar Empleado " + valor.Id + "</button></li>" +
-                        "<li>ID: " + valor.Id + "</li>" +
-                        "<li>NOMBRE: " + valor.Nombre + "</li>" +
-                        "<li>EDAD: " + valor.Edad + "</li>" +
-                        "<li>ANTIGUEDAD: " + valor.Antiguedad + "</li>" +
-                        "<li>CATEGORIA: " + valor.Categoria + "</li>" +
-                        "</ul>"
-                    )
-                })
-            },
-            error(xhr, status, error) {
-                $("#loader").fadeOut();
-                alert("something went wrong.\n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
-            }
-        });
+        getAllMethod()
     });
 
     ///////////
@@ -110,36 +82,57 @@ $("document").ready(function() {
     //////////////
     //DELETE BY ID
     //////////////
-    $("#92").click(function() {
-        console.log("9")
-    })
-
-    $(".btn-del").click(function(data) {
-        console.log($(this))
-        console.log("entra class btn-del")
+    $(document).on('click', '.btn-del', function(event) {
         $("#loader").fadeIn();
-        console.log("data: " + data + $("this").val()) //hauria de servir per fer la URL amb la ID
-            /*
-            $.ajax({ 
-                url: urlBase+"DetailsAPI/"+$("#").val(),
-                type: 'GET',
-                dataType: "jsonp",
-                jsonpCallback: 'Method',
-                beforeSend: function (xhr) {
-                    $("#loader").fadeIn();
-                },
-                success: function (data, textStatus) { 
-                    $("#loader").fadeOut();
-                },
-                error(xhr,status,error){
-                    $("#loader").fadeOut();
-                    alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
-                }
-            });*/
+        var Id = $(this).attr('id');
+        $.ajax({
+            url: urlBase + "DeleteAPI/" + Id,
+            type: 'GET',
+            dataType: "jsonp",
+            jsonpCallback: 'Method',
+            success: function(data, textStatus) {
+                getAllMethod();
+                $("#loader").fadeOut();
+            },
+            error(xhr, status, error) {
+                $("#loader").fadeOut();
+                alert("something went wrong.\n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
+            }
+        });
     });
 
 
+    function getAllMethod() {
+        $("#loader").fadeIn();
+        $.ajax({
+            url: urlBase + "allAPI/",
+            type: 'GET',
+            dataType: "jsonp",
+            jsonpCallback: 'Method',
+            success: function(data, textStatus) {
+                $("#loader").fadeOut();
+                $("#empleado").html("")
+                data.empleado.forEach(function(valor, indice, array) {
+                    $("#empleado").append(
+                        "<ul>" +
+                        "<li><button id=\"" + valor.Id + "\"> Borrar Empleado " + valor.Id + "</button></li>" +
+                        "<li>ID: " + valor.Id + "</li>" +
+                        "<li>NOMBRE: " + valor.Nombre + "</li>" +
+                        "<li>EDAD: " + valor.Edad + "</li>" +
+                        "<li>ANTIGUEDAD: " + valor.Antiguedad + "</li>" +
+                        "<li>CATEGORIA: " + valor.Categoria + "</li>" +
+                        "</ul>"
+                    )
+                })
+                $("ul li button").addClass("btn-del")
+            },
+            error(xhr, status, error) {
+                $("#loader").fadeOut();
+                alert("¡Vaya! Algo fue mal :(  \n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
+            }
+        });
 
+    }
 
     function EmpleadoToJSON(Id, Nombre, Edad, Antiguedad, Categoria) {
         return "{\"Empleado\": {\"Id\": \"" + Id + "\",\"Nombre\": \"" + Nombre + "\",\"Edad\": \"" + Edad + "\",\"Antiguedad\": \"" + Antiguedad + "\",\"Categoria\": \"" + Categoria + "\"}}";
