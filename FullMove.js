@@ -1,26 +1,20 @@
 $("document").ready(function() {
-
     $("#playGame").click(function() {
-
         $("#reset-btn").click(function() {
-            setCookie("twins", 0, 1000)
-            setCookie("tloses", 0, 1000)
-            $("#loses").text(0)
-            $("#wins").text(0)
-        })
-
-
-        ////////////////
-        //Fantasma Path tracker
-        ///////////////
+                setCookie("twins", 0, 1000)
+                setCookie("tloses", 0, 1000)
+                $("#loses").text(0)
+                $("#wins").text(0)
+            })
+            ////////////////
+            //Fantasma Path tracker
+            ///////////////
 
         $(function() {
             setInterval(oneSecondFunction, 280);
         });
 
         function oneSecondFunction() {
-            console.log("---------Begin move----------")
-
             var pxMove = 15 //px per step
             var ProbTrackedMove = 7 //0 to 10 probabilidad de que cada step no sea random
             var signe1 = "+="
@@ -29,7 +23,6 @@ $("document").ready(function() {
             arrStar = $("#star").attr("style").split("top:")[1].split("left:");
             var topStar = arrStar[0].split("px")[0]
             var leftStar = arrStar[1].split("px")[0]
-
             if (fantasmaDebil) {
                 ProbTrackedMove += 1
                 signe1 = "-="
@@ -43,7 +36,9 @@ $("document").ready(function() {
                     })
                     $("#star").show()
                 }
-            } else { $(".fantasma").attr("src", "media/fantasma.gif") }
+            } else {
+                $(".fantasma").attr("src", "media/fantasma.gif")
+            }
 
             //miro la meva posicio
             MyArr = $("#showroom").attr('style').split("top:")[1].split("left:")
@@ -53,11 +48,9 @@ $("document").ready(function() {
             //miro la seva posicio
             jQuery('.showroomOther').each(function() {
                 var currentElement = $(this);
-
                 var currentElementAttr = currentElement.attr('style').split("top:")[1].split("left:")
                 var hisTop = currentElementAttr[0].split("px")[0]
                 var hisLeft = currentElementAttr[1].split("px")[0]
-
                 var rndProb = randomIntFromInterval(1, 10)
                 if (rndProb <= ProbTrackedMove) {
                     if (Math.abs(myLeft - hisLeft) < Math.abs(myTop - hisTop)) {
@@ -103,7 +96,6 @@ $("document").ready(function() {
                         }, "fast");
                     }
                 }
-
                 // IF PICk Star
 
                 if (leftStar == null) {

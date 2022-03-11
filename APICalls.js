@@ -1,4 +1,5 @@
 var urlBase = "http://localhost:57000/Empleados/";
+
 $("document").ready(function() {
     ///////////
     //GET BY ID
@@ -10,12 +11,7 @@ $("document").ready(function() {
             type: 'GET',
             dataType: "jsonp",
             jsonpCallback: 'Method',
-            beforeSend: function(xhr) {
-                $("#loader").fadeIn();
-            },
             success: function(data, textStatus) {
-                $("#loader").fadeOut();
-
                 $("#empleado").html(
                     "<ul>" +
                     "<li>ID: " + data.empleado.Id + "</li>" +
@@ -25,10 +21,10 @@ $("document").ready(function() {
                     "<li>CATEGORIA: " + data.empleado.Categoria + "</li>" +
                     "</ul>"
                 )
+                $("#loader").fadeOut();
             },
             error(xhr, status, error) {
-                $("#loader").fadeOut();
-                alert("something went wrong.\n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
+                fadeOutNError(xhr, status, error)
             }
         });
     });
@@ -72,9 +68,7 @@ $("document").ready(function() {
                 $("#loader").fadeOut();
             },
             error(xhr, status, error) {
-                //alert("something went wrong.\n\nError: "+error+"\nStatus: "+status+"\nXHR: "+xhr);
-                $("#loader").fadeOut();
-
+                fadeOutNError(xhr, status, error)
             }
         });
     });
@@ -95,8 +89,7 @@ $("document").ready(function() {
                 $("#loader").fadeOut();
             },
             error(xhr, status, error) {
-                $("#loader").fadeOut();
-                alert("something went wrong.\n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
+                fadeOutNError(xhr, status, error)
             }
         });
     });
@@ -110,7 +103,6 @@ $("document").ready(function() {
             dataType: "jsonp",
             jsonpCallback: 'Method',
             success: function(data, textStatus) {
-                $("#loader").fadeOut();
                 $("#empleado").html("")
                 data.empleado.forEach(function(valor, indice, array) {
                     $("#empleado").append(
@@ -125,13 +117,18 @@ $("document").ready(function() {
                     )
                 })
                 $("ul li button").addClass("btn-del")
+                $("#loader").fadeOut();
             },
             error(xhr, status, error) {
-                $("#loader").fadeOut();
-                alert("¡Vaya! Algo fue mal :(  \n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
+                fadeOutNError(xhr, status, error)
             }
         });
 
+    }
+
+    function fadeOutNError(xhr, status, error) {
+        $("#loader").fadeOut();
+        alert("¡Vaya! Algo fue mal :(  \n\nError: " + error + "\nStatus: " + status + "\nXHR: " + xhr);
     }
 
     function EmpleadoToJSON(Id, Nombre, Edad, Antiguedad, Categoria) {
